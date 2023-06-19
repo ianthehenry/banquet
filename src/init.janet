@@ -22,7 +22,7 @@
 
 (defn print-table [rows &named style padding separate-rows]
   (default style styles/round)
-  (default padding 0)
+  (default padding 1)
   (default separate-rows false)
 
   (def rendered-rows (map render-row rows))
