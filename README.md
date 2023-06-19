@@ -19,7 +19,7 @@ Fancy tables.
 # ╰────────────────────────────┴─────────────╯
 ```
 
-Banquet is a library for laying out text-based tables that reperesent lists of Janet structs or tables. It's very useful in conjunction with [Judge](https://github.com/ianthehenry/judge), as you can use it in conjunction with `test-stdout` to write some very readable tests.
+Banquet is a library for laying out text-based tables that represent lists of Janet structs or tables. It pairs well with [Judge](https://github.com/ianthehenry/judge), as you can use Banquet in conjunction with `test-stdout` to write some very readable tests.
 
 # Usage
 
