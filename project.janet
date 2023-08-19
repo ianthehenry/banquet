@@ -3,8 +3,7 @@
   :description "fancy tables"
   :version "1.0.0"
   :dependencies
-    [{:url "https://github.com/ianthehenry/judge.git"
-      :tag "v2.6.0"}])
+    ["https://github.com/ianthehenry/judge.git"])
 
 (declare-source
   :prefix "banquet"
