@@ -99,6 +99,10 @@ There are lower-level helpers for formatting values and inferring headers from d
 
 # Changelog
 
+# next
+
+- renamed `print-table` to `print-rows`
+
 # v1.0.0 2023-06-19
 
 Initial release.

@@ -3,7 +3,7 @@
 
 (deftest "padding"
   (test-stdout
-    (banquet/print-table [["a" "b"] ["1" "2"]]) `
+    (banquet/print-rows [["a" "b"] ["1" "2"]]) `
     ╭───┬───╮
     │ a │ b │
     ├───┼───┤
@@ -12,7 +12,7 @@
   `)
 
   (test-stdout
-    (banquet/print-table [["a" "b"] ["1" "2"]] :padding 1) `
+    (banquet/print-rows [["a" "b"] ["1" "2"]] :padding 1) `
     ╭───┬───╮
     │ a │ b │
     ├───┼───┤
@@ -22,7 +22,7 @@
 
 (deftest "separate-rows"
   (test-stdout
-    (banquet/print-table [["a" "b"] ["1" "2"] ["2" "3"]] :separate-rows false) `
+    (banquet/print-rows [["a" "b"] ["1" "2"] ["2" "3"]] :separate-rows false) `
     ╭───┬───╮
     │ a │ b │
     ├───┼───┤
@@ -32,7 +32,7 @@
   `)
 
   (test-stdout
-    (banquet/print-table [["a" "b"] ["1" "2"] ["2" "3"]] :separate-rows true) `
+    (banquet/print-rows [["a" "b"] ["1" "2"] ["2" "3"]] :separate-rows true) `
     ╭───┬───╮
     │ a │ b │
     ├───┼───┤
@@ -54,7 +54,7 @@
 
 (test-stdout
   (let [[header rows] (banquet/of-dicts data)]
-    (banquet/print-table [(banquet/render-header header) ;(banquet/render-rows rows)])) `
+    (banquet/print-rows [(banquet/render-header header) ;(banquet/render-rows rows)])) `
   ╭───┬───╮
   │ a │ b │
   ├───┼───┤

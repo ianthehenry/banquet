@@ -29,7 +29,7 @@
     (prin (string/repeat horizontal (+ width (* padding 2)))))
   (print right))
 
-(defn print-table [rows &named style padding separate-rows]
+(defn print-rows [rows &named style padding separate-rows]
   (default style styles/round)
   (default padding 1)
   (default separate-rows false)
@@ -69,4 +69,4 @@
 
 (defn print [dicts & opts]
   (def [header rows] (of-dicts dicts))
-  (print-table [(render-header header) ;(render-rows rows)] ;opts))
+  (print-rows [(render-header header) ;(render-rows rows)] ;opts))

@@ -21,7 +21,6 @@
   (or (= (band byte 0x80) 0x00)
       (= (band byte 0xc0) 0xc0)))
 
-
 (test (start-of-utf8-sequence? (in (string/bytes "a") 0)) true)
 (test (start-of-utf8-sequence? (in (string/bytes "☃") 0)) true)
 (test (start-of-utf8-sequence? (in (string/bytes "☃") 1)) false)
