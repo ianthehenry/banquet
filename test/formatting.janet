@@ -75,3 +75,52 @@
   │   │ 6 │
   ╰───┴───╯
 `)
+
+(def columns-test
+  [{1 :a 2 :b 3 :c 4 :d 5 :e}
+   {3 :h 2 :g 4 :i 5 :j 1 :f}])
+
+(test-stdout (banquet/print columns-test :column-order [1 2 3 4 5]) `
+  ╭────┬────┬────┬────┬────╮
+  │ 1  │ 2  │ 3  │ 4  │ 5  │
+  ├────┼────┼────┼────┼────┤
+  │ :a │ :b │ :c │ :d │ :e │
+  │ :f │ :g │ :h │ :i │ :j │
+  ╰────┴────┴────┴────┴────╯
+`)
+
+(test-stdout (banquet/print columns-test :column-order [5 4 3 2 1]) `
+  ╭────┬────┬────┬────┬────╮
+  │ 5  │ 4  │ 3  │ 2  │ 1  │
+  ├────┼────┼────┼────┼────┤
+  │ :e │ :d │ :c │ :b │ :a │
+  │ :j │ :i │ :h │ :g │ :f │
+  ╰────┴────┴────┴────┴────╯
+`)
+
+(test-stdout (banquet/print columns-test :column-order (-> columns-test first keys sort)) `
+  ╭────┬────┬────┬────┬────╮
+  │ 1  │ 2  │ 3  │ 4  │ 5  │
+  ├────┼────┼────┼────┼────┤
+  │ :a │ :b │ :c │ :d │ :e │
+  │ :f │ :g │ :h │ :i │ :j │
+  ╰────┴────┴────┴────┴────╯
+`)
+
+(test-stdout (banquet/print columns-test :column-order (-> columns-test first keys sort reverse)) `
+  ╭────┬────┬────┬────┬────╮
+  │ 5  │ 4  │ 3  │ 2  │ 1  │
+  ├────┼────┼────┼────┼────┤
+  │ :e │ :d │ :c │ :b │ :a │
+  │ :j │ :i │ :h │ :g │ :f │
+  ╰────┴────┴────┴────┴────╯
+`)
+
+(test-error (banquet/print columns-test :column-order [5 4 3 2 :a])
+  "every value in first row must appear in `:column-order`")
+
+(test-error (banquet/print columns-test :column-order [5 4 3 2])
+  "`:column-order` must have the same length as table header")
+
+(test-error (banquet/print columns-test :column-order [5 4 3 2 1 1])
+  "`:column-order` must have the same length as table header")

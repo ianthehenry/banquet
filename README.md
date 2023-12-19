@@ -83,6 +83,20 @@ The default style is `banquet/styles/round`. Currently the only styles are:
 
 But it's easy to add more.
 
+```janet
+(banquet/print books :column-order [:word-count :name])
+
+# ╭────────────┬────────────────────────────╮
+# │ word-count │ name                       │
+# ├────────────┼────────────────────────────┤
+# │ 187790     │ The Fellowship of the Ring │
+# │ 156198     │ The Two Towers             │
+# │ 137115     │ The Return of the King     │
+# ╰────────────┴────────────────────────────╯
+```
+
+`:column-order` should be an array or tuple containing the same elements as your table's header row, in the order you'd like your columns to appear in the output.
+
 # API
 
 `banquet/print-rows` takes an iterable of iterables of strings.
@@ -93,7 +107,7 @@ But it's easy to add more.
 
     (banquet/print [{:x 1 :y 2} {:x 2 :y 4}])
 
-Both can take the optional named arguments `:padding`, `:separate-rows`, and `:style`.
+Both can take the optional named arguments `:padding`, `:separate-rows`, `:style`, and `:column-order`.
 
 There are lower-level helpers for formatting values and inferring headers from dicts. It's probably easiest to just read the source for those.
 
@@ -102,6 +116,7 @@ There are lower-level helpers for formatting values and inferring headers from d
 # next
 
 - renamed `print-table` to `print-rows`
+- ability to reorder columns with `:column-order` named argument
 
 # v1.0.0 2023-06-19
 
