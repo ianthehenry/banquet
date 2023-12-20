@@ -57,3 +57,13 @@
   | The Return of the King     | 137115     |
   '-----------------------------------------'
 `)
+
+(test-stdout (banquet/print books :column-order [:word-count :name]) `
+  ╭────────────┬────────────────────────────╮
+  │ word-count │ name                       │
+  ├────────────┼────────────────────────────┤
+  │ 187790     │ The Fellowship of the Ring │
+  │ 156198     │ The Two Towers             │
+  │ 137115     │ The Return of the King     │
+  ╰────────────┴────────────────────────────╯
+`)

@@ -29,16 +29,25 @@
     (prin (string/repeat horizontal (+ width (* padding 2)))))
   (print right))
 
-(defn print-rows [rows &named style padding separate-rows]
+(defn print-rows [rows &named style padding separate-rows column-order]
   (default style styles/round)
   (default padding 1)
   (default separate-rows false)
+  (default column-order nil) 
+  
+  (when column-order
+    (assert (every? (map |(index-of (string $) (first rows)) column-order))
+            "every value in first row must appear in `:column-order`")
+    (assert (= (length column-order) (length (first rows)))
+            "`:column-order` must have the same length as table header"))
 
+  (def order-mask (if column-order (map |(index-of (string $) (first rows)) column-order) nil)) 
   (def init (array/new-filled (length (first rows)) 0))
-  (def column-widths (reduce |(map max $0 (map length $1)) init rows))
+  (def ordered-rows (if column-order (seq [row :in rows] (map |(get row $) order-mask)) rows))
+  (def column-widths (reduce |(map max $0 (map length $1)) init ordered-rows))
 
   (print-separator column-widths padding [(style :top-left) (style :horizontal) (style :top-sep) (style :top-right)])
-  (eachp [i row] rows
+  (eachp [i row] ordered-rows
     (when (and (not= i 0) (or (= i 1) separate-rows))
       (print-separator column-widths padding [(style :left-sep) (style :horizontal) (style :cross) (style :right-sep)]))
 
